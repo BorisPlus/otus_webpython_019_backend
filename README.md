@@ -49,7 +49,7 @@ python3 <absolute_path>/bug_report/backend/app.py
 
 ## Авторы
 
-* **BorisPlus** - [https://github.com/BorisPlus/otus_webpython_004](https://github.com/BorisPlus/otus_webpython_004)
+* **BorisPlus** - [https://github.com/BorisPlus/otus_webpython_019_backend](https://github.com/BorisPlus/otus_webpython_019_backend)
 
 ## Лицензия
 
