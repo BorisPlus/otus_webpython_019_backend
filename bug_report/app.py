@@ -49,25 +49,28 @@ def object_info(id):
 @app.route("/bug_report/create", methods=['POST'])
 @cross_origin()
 def create():
-    # curl -H "Content-type: application/json" -X POST http://127.0.0.1:8280/create -d '{"message":"Hello Data"}'
-    print('cross_origin create')
-    print('request.method = ', request.method)
-    print('request.json = ', request.json)
-    print('json.dumps(request.json) = ', json.dumps(request.json))
-    print('request.headers = ', request.headers)
-    print('request.args = ', request.args)
+    # curl -H "Content-type: application/json" -d '{"selectedText":"selectedText", "userText":"userText", "href":"href", "honestMarker":"True"}' -X POST http://127.0.0.1:8280/bug_report/create
+    # print('cross_origin create')
+    # print('request.method = ', request.method)
+    # print('request.json = ', request.json)
+    # print('json.dumps(request.json) = ', json.dumps(request.json))
+    # print('request.headers = ', request.headers)
+    # print('request.args = ', request.args)
     b = BugReport()
     b.request_headers = ': '.join(['{}: {}'.format(header[0], header[1], ) for header in request.headers])
     b.request_args = '; '.join(request.args)
     b.request_json = json.dumps(request.json)
     b.datetime = datetime.datetime.now()
     b.href = request.json.get('href')
-    b.selected_text = request.json.get('seletedText')
+    b.selected_text = request.json.get('selectedText')
     b.user_text = request.json.get('userText')
     b.honest = True if request.json.get('honestMarker') else False
     db.session.add(b)
     db.session.commit()
-    return redirect(url_for('objects_list'))
+    # print('request.is_xhr = ', request.is_xhr)
+    if request.is_xhr:
+        return redirect(url_for('objects_list'))
+    return json.dumps({'message': 'Well done!'})
 
 
 @app.route("/about")
