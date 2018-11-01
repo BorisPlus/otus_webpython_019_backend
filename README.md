@@ -47,12 +47,6 @@ python3 <absolute_path>/bug_report/backend/app.py
 ```
 , чтобы очистить базу данных, можно просто удалить файл **_<absolute_path>/bug_report/backend/db/bug_report.db_** и перезапустить приложение 
 
-или же выполнить 
-
-```bash
-python3 <absolute_path>/bug_report/backend/__init__.py
-```
-
 ## Авторы
 
 * **BorisPlus** - [https://github.com/BorisPlus/otus_webpython_004](https://github.com/BorisPlus/otus_webpython_004)

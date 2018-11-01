@@ -1,13 +1,13 @@
 from flask import Flask
 import os
 from flask_sqlalchemy import SQLAlchemy
-from flask_cors import CORS
+# from flask_cors import CORS
+# CORS(app)
+# CORS(app, resources={r"/api/post/*": {"origins": "*"}})
 
 app_base_path = os.path.dirname(os.path.abspath(__file__))
 app_name = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
 app = Flask(app_name)
-# CORS(app)
-# CORS(app, resources={r"/api/post/*": {"origins": "*"}})
 app.secret_key = b'012465789'
 db_folder = os.path.join(app_base_path, 'db')
 if not os.path.exists(db_folder):

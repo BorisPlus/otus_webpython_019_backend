@@ -1,7 +1,8 @@
-import os
-import sys
 import datetime
 import json
+import os
+import sys
+
 from flask import (
     render_template,
     make_response,
@@ -12,16 +13,18 @@ from flask import (
 )
 from flask_cors import cross_origin
 
-app_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+app_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if app_path not in sys.path:
     sys.path.append(app_path)
 
-from bug_report.backend.config import (
+from bug_report.config import (
     app,
     db_file,
+    app_name,
+    app_base_path,
     db
 )
-from bug_report.backend.models import BugReport
+from bug_report.models import BugReport
 
 if not os.path.exists(db_file):
     db.create_all()
@@ -40,19 +43,19 @@ def object_info(id):
         return render_template('info.html', id=id, flask_object=flask_object)
     else:
         flash('Object with ID %s was not found.' % id, 'danger')
-        return redirect(url_for('list'))
+        return redirect(url_for('objects_list'))
 
 
 @app.route("/bug_report/create", methods=['POST'])
 @cross_origin()
 def create():
     # curl -H "Content-type: application/json" -X POST http://127.0.0.1:8280/create -d '{"message":"Hello Data"}'
-    # print('cross_origin create')
-    # print('request.method = ', request.method)
-    # print('request.json = ', request.json)
-    # print('json.dumps(request.json) = ', json.dumps(request.json))
-    # print('request.headers = ', request.headers)
-    # print('request.args = ', request.args)
+    print('cross_origin create')
+    print('request.method = ', request.method)
+    print('request.json = ', request.json)
+    print('json.dumps(request.json) = ', json.dumps(request.json))
+    print('request.headers = ', request.headers)
+    print('request.args = ', request.args)
     b = BugReport()
     b.request_headers = ': '.join(['{}: {}'.format(header[0], header[1], ) for header in request.headers])
     b.request_args = '; '.join(request.args)
@@ -64,12 +67,12 @@ def create():
     b.honest = True if request.json.get('honestMarker') else False
     db.session.add(b)
     db.session.commit()
-    return redirect(url_for('list'))
+    return redirect(url_for('objects_list'))
 
 
 @app.route("/about")
 def about():
-    return "BugReport Backend App."
+    return "BugReport Backend App. (%s, %s)" % (app_name, app_base_path)
 
 
 @app.errorhandler(404)

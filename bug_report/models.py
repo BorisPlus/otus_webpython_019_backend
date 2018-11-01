@@ -7,7 +7,7 @@ kiosk_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if kiosk_path not in sys.path:
     sys.path.append(kiosk_path)
 
-from bug_report.backend.config import db
+from bug_report.config import db
 
 
 class BugReport(db.Model):
@@ -28,7 +28,7 @@ class BugReport(db.Model):
     )
 
     def __repr__(self):
-        return '<%s %s>' % (self.__class__, self.href)
+        return '<%s %s>' % (self.__class__, self.id)
 
     def __str__(self):
         return '%s %s %s %s %s' % (self.datetime, self.href, self.selected_text, self.user_text, self.honest)
