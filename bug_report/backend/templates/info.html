@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block html_head_title %}
+BugReport №{{ flask_object.id }} info
+{% endblock %}
+
+{% block html_body %}
+<a href="/">К общему списку</a>
+<div>
+    <ul>
+        <li><b>BugReport №{{ flask_object.id }}</b></li>
+        <li><b>Datetime:</b> {{ flask_object.datetime }}</li>
+        <li><b>Href:</b> {{ flask_object.href }}</li>
+        <li><b>Selected text:</b> {{ flask_object.selected_text }}</li>
+        <li><b>User text:</b> {{ flask_object.user_text }}</li>
+        <li><b>Request:</b>
+            <ul>
+                <li><i>headers:</i> {{ flask_object.request_headers }}</li>
+                <li><i>args:</i> {{ flask_object.request_args }}</li>
+                <li><i>json:</i> {{ flask_object.request_json }}</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+{% endblock %}

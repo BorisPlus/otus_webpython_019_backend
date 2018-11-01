@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block html_head_title %}
+BugReports list
+{% endblock %}
+
+{% block html_body %}
+<h1>BugReports list</h1>
+<table class="table">
+    <tr>
+        <th>№</th>
+        <th>Datetime</th>
+        <th>Href</th>
+        <th>Selected text</th>
+        <th>User text</th>
+        <th>Honest</th>
+    </tr>
+    {% for flask_object in flask_objects %}
+    <tr>
+        <td><a href="/info/{{ flask_object.id }}">{{ flask_object.id }}</a></td>
+        <td>{{ flask_object.datetime }}</td>
+        <td>{{ flask_object.href }}</td>
+        <td>{{ flask_object.selected_text }}</td>
+        <td>{{ flask_object.user_text }}</td>
+        <td>{{ flask_object.honest }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
