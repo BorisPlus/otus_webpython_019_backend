@@ -33,7 +33,7 @@ if not os.path.exists(db_file):
 @app.route("/")
 @app.route("/list")
 def objects_list():
-    return render_template('list.html', flask_objects=BugReport.query.all())
+    return render_template('list.html', flask_objects=BugReport.query.order_by(BugReport.datetime.desc()).all())
 
 
 @app.route("/info/<int:id>")
@@ -88,4 +88,4 @@ def not_found(error):
 if __name__ == '__main__':
     if not os.path.exists(db_file):
         db.create_all()
-    app.run(host='127.0.0.1', port=8280)
+    app.run(host='127.0.0.1', port=5000)
