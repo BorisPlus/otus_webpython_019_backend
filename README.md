@@ -43,7 +43,7 @@ pip3 install -r requirements.txt
 
 Чтобы запустить проект выполните
 ```bash
-python3 <absolute_path>/bug_report/backend/app.py
+python3 <absolute_path>/app.py
 ```
 , чтобы очистить базу данных, можно просто удалить файл **_<absolute_path>/bug_report/backend/db/bug_report.db_** и перезапустить приложение 
 
